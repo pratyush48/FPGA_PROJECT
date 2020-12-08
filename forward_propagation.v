@@ -8,14 +8,19 @@ parameter layers = 10;
 parameter nueron = 10;
 integer i = 0,j = 0;
 input clk;
-// activate act(weights[j],data[i],act_out);
-// sigmoid sig(act_out,sig_out);
+
+reg flag = 0;
+wire [63:0] act_out1, sig_out, act_out2;
+activate1 act1(flag, i, j, act_out1);
+activate2 act2(flag, i, j, act_out1);
+sigmoid sig(flag, act_out1, act_out2, sig_out);
 always@(posedge clk)
 begin
     if(j == 2)
     begin
         i = i + 1;
         j = 0;
+        flag = 0;
     end
     j = j + 1;
     $display("%d,%d",i,j);

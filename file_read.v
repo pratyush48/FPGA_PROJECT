@@ -16,6 +16,7 @@ reg[63:0]memory[0:lines-1];
 reg[63:0]data[0:row-1][0:column-1];
 reg[63:0]out[0:lines-1];
 reg[63:0]weights[0:layers-1][0:column];
+reg[63:0]mid_out[0:layers-1];
 reg[63:0]final_weight[0:layers];
 
 initial
