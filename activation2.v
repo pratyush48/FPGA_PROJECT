@@ -1,22 +1,69 @@
-module activate2(flag, i, j, act_out);
+module activate2(clk, i, j, act_out1, act_out2, done_act_2);
 
-input flag;
+input clk;
 input [31:0] i, j;
-output reg [63:0] act_out;
+output reg [63:0] act_out1 = 0, act_out2 = 0;
+output reg done_act_2 = 0;
 
-integer cnt;
 
-always @ (i, j)
+integer cnt, w_n = 0;
+
+
+// always @(posedge clk)
+// begin
+//     done_act_2 = done_act_2_a && done_act_2_b;
+
+// end
+
+
+always @ (posedge clk)
 begin
-    if(flag == 1)
+    if(j == 1)
     begin
-    for(cnt = 0; cnt < 10; cnt = cnt + 1)
+    if(w_n <= 9)
     begin
-        act_out += file_read.final_weight[j][cnt]*file_read.mid_out[i][cnt];
+        done_act_2 = 0;
+        act_out1 = $realtobits($bitstoreal(act_out1) + ($bitstoreal(file_read.final_weight[0][w_n])*$bitstoreal(file_read.mid_out[w_n])));
+        act_out2 = $realtobits($bitstoreal(act_out2) + ($bitstoreal(file_read.final_weight[1][w_n])*$bitstoreal(file_read.mid_out[w_n])));
+        // $display("act_out2 = %f\n", act_out2);
+        w_n = w_n+1;
     end
-    act_out += file_read.final_weight[j][10];
+    else
+    begin
+        act_out1 = $realtobits($bitstoreal(act_out1) + $bitstoreal(file_read.final_weight[0][10]));
+        act_out2 = $realtobits($bitstoreal(act_out2) + $bitstoreal(file_read.final_weight[1][10]));
+        w_n = 0;
+        done_act_2 = 1;
+    end
+    end
+    else
+    begin
+        done_act_2 = 0;
     end
 end
+
+// always @ (posedge clk)
+// begin
+//     if(j == 1)
+//     begin
+//     if(w_n <= 9)
+//     begin
+//         done_act_2_b = 0;
+//         act_out2 = act_out2 + file_read.final_weight[1][w_n]*file_read.mid_out[w_n];
+//         w_n=w_n+1;
+//     end
+//     else
+//     begin
+//         act_out2 = act_out2 + file_read.final_weight[1][10];
+//         w_n = 0;
+//         done_act_2_b = 1;
+//     end
+//     end
+//     else
+//     begin
+//         done_act_2_b = 0;
+//     end
+// end
 
 
 endmodule

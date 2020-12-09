@@ -1,20 +1,34 @@
-module activate1(flag, i, j, act_out);
+module activate1(clk, i, j, n_n1, act_out, done_act_1);
 
-input flag;
-input [31:0] i, j;
-output reg [63:0] act_out;
+input clk;
+input [31:0] i, j, n_n1;
+output reg [63:0] act_out = 0;
+output reg done_act_1 = 0;
 
-integer cnt;
+integer cnt, w_n = 0;
 
-always @ (i, j)
+
+always @ (posedge clk)
 begin
-    if(flag == 0)
+    if(j == 0)
     begin
-    for(cnt = 0; cnt < 14; cnt = cnt + 1)
+    if(w_n <= 14)
     begin
-        act_out += file_read.weights[j][cnt]*file_read.data[i][cnt];
+        done_act_1 = 0;
+        act_out = $realtobits($bitstoreal(act_out) + ($bitstoreal(file_read.weights[n_n1][w_n])*$bitstoreal(file_read.data[i][w_n])));
+        $display("act_out=%d %f %f",n_n1, $bitstoreal(file_read.weights[n_n1][w_n])*$bitstoreal(file_read.data[i][w_n]), $bitstoreal(act_out));
+        w_n = w_n+1;
     end
-    act_out += file_read.weights[j][15];
+    else
+    begin
+        act_out = $realtobits($bitstoreal(act_out) + $bitstoreal(file_read.weights[n_n1][15]));
+        w_n = 0;
+        done_act_1 = 1;
+    end
+    end
+    else
+    begin
+        done_act_1 = 0;
     end
 end
 
