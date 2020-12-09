@@ -73,14 +73,14 @@ initial
             end
         end
         // //Print data of test
-        for(i = 0;i < row;i=i+1)
-        begin
-            for(j=0;j < column;j=j+1)
-            begin
-                $display("data[%d][%d] = %f",i,j,$bitstoreal(data[i][j]));
-            end
-            $display("out[%d] = %f",i,$bitstoreal(out[i]));
-        end        
+        // for(i = 0;i < row;i=i+1)
+        // begin
+        //     for(j=0;j < column;j=j+1)
+        //     begin
+        //         $display("data[%d][%d] = %f",i,j,$bitstoreal(data[i][j]));
+        //     end
+        //     $display("out[%d] = %f",i,$bitstoreal(out[i]));
+        // end        
         // //Print data of weights
         // for(i = 0;i < layers;i=i+1)
         // begin
