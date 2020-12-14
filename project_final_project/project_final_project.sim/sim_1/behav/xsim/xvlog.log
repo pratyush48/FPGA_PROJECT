@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Pratyush Nandi/project_final_project/project_final_project.srcs/sources_1/ip/blk_mem_gen_1/sim/blk_mem_gen_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module blk_mem_gen_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Pratyush Nandi/project_final_project/project_final_project.srcs/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module blk_mem_gen_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Pratyush Nandi/project_final_project/project_final_project.srcs/sources_1/imports/FPGA_PROJECT-master/file_read.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module file_read
